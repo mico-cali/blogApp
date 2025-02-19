@@ -14,10 +14,10 @@ router.get('/blog/:blogId', commentController.getCommentsByBlogId);
 router.get('/:id', commentController.getCommentById);
 
 // update a comment
-router.put('/:id', verify, commentController.updateComment);
+router.put('/:id/update', verify, commentController.updateComment);
 
 // delete a comment
-router.delete('/:id', verify, verifyAdmin, commentController.deleteComment);
+router.delete('/:id/delete', verify, commentController.deleteComment);
 
 
 module.exports = router;

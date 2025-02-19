@@ -62,9 +62,44 @@ module.exports.getCommentById = (req, res) => {
 
 
 // Update a comment
+// module.exports.updateComment = (req, res) => {
+//     const { content } = req.body;
+
+//     if (!content) {
+//         return res.status(400).json({ message: 'Content is required for update' });
+//     }
+
+//     Comment.findById(req.params.id)
+//         .then(comment => {
+//             if (!comment) {
+//                 return res.status(404).json({ message: 'Comment not found' });
+//             }
+
+//             // check authorization wherein the author or admin can update it
+//             if (comment.author.toString() !== req.user.id.toString() && !req.user.isAdmin) {
+//                 return res.status(403).json({ message: 'Unauthorized' });
+//             }
+
+//             comment.content = content;
+//             return comment.save();
+//         })
+//         .then(updatedComment => {
+//             return Comment.findById(updatedComment._id).populate('author', 'username');
+//         })
+//         .then(populatedComment => {
+//             res.status(200).json({ 
+//             	message: 'Comment updated', 
+//             	comment: populatedComment 
+//             });
+//         })
+//         .catch(error => {
+//             console.error(error);
+//             res.status(500).json({ message: 'Server error' });
+//         });
+// };
+
 module.exports.updateComment = (req, res) => {
     const { content } = req.body;
-
     if (!content) {
         return res.status(400).json({ message: 'Content is required for update' });
     }
@@ -74,8 +109,9 @@ module.exports.updateComment = (req, res) => {
             if (!comment) {
                 return res.status(404).json({ message: 'Comment not found' });
             }
+            
+            console.log("User ID:", req.user.id, "Comment Author ID:", comment.author.toString());
 
-            // check authorization wherein the author or admin can update it
             if (comment.author.toString() !== req.user.id.toString() && !req.user.isAdmin) {
                 return res.status(403).json({ message: 'Unauthorized' });
             }
@@ -87,16 +123,15 @@ module.exports.updateComment = (req, res) => {
             return Comment.findById(updatedComment._id).populate('author', 'username');
         })
         .then(populatedComment => {
-            res.status(200).json({ 
-            	message: 'Comment updated', 
-            	comment: populatedComment 
-            });
+            console.log("Updated Comment:", populatedComment);
+            res.status(200).json({ message: 'Comment updated', comment: populatedComment });
         })
         .catch(error => {
             console.error(error);
             res.status(500).json({ message: 'Server error' });
         });
 };
+
 
 
 // delete a comment

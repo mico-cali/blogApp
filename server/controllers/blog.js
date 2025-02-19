@@ -30,6 +30,7 @@ module.exports.createPost = (req, res) => {
 // get posts
 module.exports.getAllPosts = (req, res) => {
 	Blog.find({})
+    .populate('author', 'username')
 	.then(blogs => {
         if (blogs.length > 0) {
     		const postsWithComments = [];
@@ -73,6 +74,7 @@ module.exports.getAllPosts = (req, res) => {
 // get post by id
 module.exports.getPostById = (req, res) => {
 	Blog.findById(req.params.id)
+    .populate('author', 'username')
     .then(blog => {
         if (!blog) {
             return res.status(404).send({ error: 'No blogs found' });
