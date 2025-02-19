@@ -1,4 +1,5 @@
 const Blog = require('../models/Blog')
+const Comment = require('../models/Comment');
 const { errorHandler } = require("../auth");
 
 
@@ -29,13 +30,42 @@ module.exports.createPost = (req, res) => {
 // get posts
 module.exports.getAllPosts = (req, res) => {
 	Blog.find({})
-	.then(result => {
-		if(result.length > 0) {
-			return res.status(200).send(result)
-		} else {
-			return res.status(404).send({ error: 'No blogs found' })
-		}
-	})
+	.then(blogs => {
+        if (blogs.length > 0) {
+    		const postsWithComments = [];
+
+            // Use a loop to process each blog
+            let processedBlogs = 0;
+
+            if (blogs.length === 0){
+                return res.status(200).send([])
+            }
+
+            blogs.forEach(blog => { // Use forEach for iterating
+                Comment.find({ blog: blog.id }).populate('author', 'username')
+                    .then(comments => {
+                        const postWithComments = {
+                            ...blog.toObject(),
+                            comments: comments
+                        };
+                        postsWithComments.push(postWithComments);
+
+                        processedBlogs++;
+
+                        // Check if all blogs have been processed
+                        if (processedBlogs === blogs.length) {
+                            res.status(200).send(postsWithComments);
+                        }
+                    })
+                    .catch(error => {
+                        errorHandler(error, req, res);
+                    });
+            });
+
+        } else {
+            return res.status(404).send({ error: 'No blogs found' });
+        }
+  	})
 	.catch(error => errorHandler(error, req, res))
 }
 
@@ -43,13 +73,24 @@ module.exports.getAllPosts = (req, res) => {
 // get post by id
 module.exports.getPostById = (req, res) => {
 	Blog.findById(req.params.id)
-	.then(result => {
-		if(result) {
-			return res.status(200).send(result)
-		} else {
-			return res.status(404).send({ error: 'No blogs found' })
-		}
-	})
+    .then(blog => {
+        if (!blog) {
+            return res.status(404).send({ error: 'No blogs found' });
+        }
+
+        Comment.find({ blog: blog._id }).populate('author', 'username')
+            .then(comments => {
+                const postWithComments = {
+                    ...blog.toObject(),
+                    comments: comments
+                };
+                res.status(200).send(postWithComments);
+            })
+            .catch(commentError => {
+                console.error("Error fetching comments:", commentError);
+                res.status(500).json({ message: 'Error fetching comments' });
+            });
+        })
 	.catch(error => errorHandler(error, req, res))
 } 
 
