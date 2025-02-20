@@ -20,8 +20,8 @@ const corsOptions = {
   origin: [
     "http://localhost:3000",
     "https://blogapp-server-7qfm.onrender.com",
-    "blog-app-micocalis-projects.vercel.app",
     "blog-app-git-master-micocalis-projects.vercel.app",
+    "blog-c42h8qf5h-micocalis-projects.vercel.app",
   ],
   credentials: true,
   optionsSuccessStatus: 200,
