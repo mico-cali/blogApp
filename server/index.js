@@ -17,11 +17,11 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 const corsOptions = {
+  // origin: ['http://localhost:3000'],
   origin: [
-    "http://localhost:3000",
+    "blog-app-micocalis-projects.vercel.app",
     "https://blogapp-server-7qfm.onrender.com",
-    "blog-app-git-master-micocalis-projects.vercel.app",
-    "blog-c42h8qf5h-micocalis-projects.vercel.app",
+    "http://localhost:3000",
   ],
   credentials: true,
   optionsSuccessStatus: 200,
