@@ -22,7 +22,7 @@ const corsOptions = {
     "https://blog-app-liard-ten.vercel.app",
     "https://blog-app-micocalis-projects.vercel.app",
     "https://blog-app-git-master-micocalis-projects.vercel.app",
-    "https://blog-gnk8i5gab-micocalis-projects.vercel.app",
+    "https://blog-q9tmow1yr-micocalis-projects.vercel.app",
     "https://blogapp-server-7qfm.onrender.com",
     "http://localhost:3000",
   ],
