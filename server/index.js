@@ -19,7 +19,10 @@ app.use(express.urlencoded({ extended: true }));
 const corsOptions = {
   // origin: ['http://localhost:3000'],
   origin: [
-    "blog-app-micocalis-projects.vercel.app",
+    "https://blog-app-liard-ten.vercel.app",
+    "https://blog-app-micocalis-projects.vercel.app",
+    "https://blog-app-git-master-micocalis-projects.vercel.app",
+    "https://blog-gnk8i5gab-micocalis-projects.vercel.app",
     "https://blogapp-server-7qfm.onrender.com",
     "http://localhost:3000",
   ],
