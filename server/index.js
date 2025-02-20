@@ -11,35 +11,43 @@ const commentRoutes = require("./routes/comment");
 const PORT = 4000;
 
 // Server Setup
-const app = express()
+const app = express();
 
 app.use(express.json());
-app.use(express.urlencoded({extended:true}));
+app.use(express.urlencoded({ extended: true }));
 
 const corsOptions = {
-	origin: ['http://localhost:3000', 'https://blogapp-server-7qfm.onrender.com'], 
-	credentials: true, 
-	optionsSuccessStatus: 200
-}
+  origin: [
+    "http://localhost:3000",
+    "https://blogapp-server-7qfm.onrender.com",
+    "blog-app-micocalis-projects.vercel.app",
+    "blog-app-git-master-micocalis-projects.vercel.app",
+  ],
+  credentials: true,
+  optionsSuccessStatus: 200,
+};
 
 app.use(cors(corsOptions));
 
-
 //MongoDB database
-mongoose.connect("mongodb+srv://mico_cali:pass123@cluster0.4ipfp.mongodb.net/blog-API?retryWrites=true&w=majority&appName=Cluster0");
+mongoose.connect(
+  "mongodb+srv://mico_cali:pass123@cluster0.4ipfp.mongodb.net/blog-API?retryWrites=true&w=majority&appName=Cluster0"
+);
 
-mongoose.connection.once('open', () => console.log('Now connected to MongoDB Atlas.'));
+mongoose.connection.once("open", () =>
+  console.log("Now connected to MongoDB Atlas.")
+);
 
-// Backend Routes 
+// Backend Routes
 app.use("/users", userRoutes);
 app.use("/blogs", blogRoutes);
 app.use("/comments", commentRoutes);
 
 // Server Gateway Response
-if(require.main === module){
-	app.listen(PORT || 3000, ()=> {
-		console.log(`API is now online on port ${PORT || 3000}`)
-	})
+if (require.main === module) {
+  app.listen(PORT || 3000, () => {
+    console.log(`API is now online on port ${PORT || 3000}`);
+  });
 }
 
-module.exports = {app, mongoose}
+module.exports = { app, mongoose };
