@@ -3,6 +3,7 @@ import { Link, NavLink } from 'react-router-dom';
 // import { useState, useContext } from 'react';
 import { useContext } from 'react';
 import UserContext from '../context/UserContext';
+import { GiSewingNeedle } from "react-icons/gi";
 
 export default function AppNavbar() {
 
@@ -12,7 +13,7 @@ export default function AppNavbar() {
         <Navbar expand="lg" className="bg-black navbar-dark">
             <Container className="ms-auto">
                 <Navbar.Brand as={Link} to="/">
-                    Threadify
+                    <GiSewingNeedle /> Threadify
                 </Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end">

@@ -39,8 +39,7 @@ export default function Register() {
     function registerUser(e) {
     	e.preventDefault();
 
-    	// fetch('https://blogapp-sever.onrender.com/users/register', {
-        fetch('http://localhost:4000/users/register', {
+        fetch('https://blogapp-server-7qfm.onrender.com/users/register', {
     		method: 'POST',
     		headers: {
     			"Content-Type": "application/json"
@@ -95,7 +94,7 @@ export default function Register() {
                                 {/*Inputs*/}
                                 <Form onSubmit={(e) => registerUser(e)}>
 
-                                    <Form.Group className="mb-3" controlId="email">
+                                    <Form.Group className="mb-2" controlId="email">
                                         <Form.Label>Username:</Form.Label>
                                         <Form.Control
                                             type="text"
@@ -103,11 +102,11 @@ export default function Register() {
                                             required
                                             value={username}
                                             onChange={(e) => setUsername(e.target.value)}
-                                            className="form-control-lg"
+                                            className="form-control"
                                         />
                                     </Form.Group>
                                     
-                                    <Form.Group className="mb-3" controlId="email">
+                                    <Form.Group className="mb-2" controlId="email">
                                         <Form.Label>Email:</Form.Label>
                                         <Form.Control
                                             type="email"
@@ -115,11 +114,11 @@ export default function Register() {
                                             required
                                             value={email}
                                             onChange={(e) => setEmail(e.target.value)}
-                                            className="form-control-lg"
+                                            className="form-control"
                                         />
                                     </Form.Group>
 
-                                    <Form.Group className="mb-3" controlId="password">
+                                    <Form.Group className="mb-2" controlId="password">
                                         <Form.Label>Password:</Form.Label>
                                         <Form.Control
                                             type="password"
@@ -127,7 +126,7 @@ export default function Register() {
                                             required
                                             value={password}
                                             onChange={(e) => setPassword(e.target.value)}
-                                            className="form-control-lg"
+                                            className="form-control"
                                         />
                                     </Form.Group>
 
@@ -139,18 +138,18 @@ export default function Register() {
                                             required
                                             value={confirmPassword}
                                             onChange={(e) => setConfirmPassword(e.target.value)}
-                                            className="form-control-lg"
+                                            className="form-control"
                                         />
                                     </Form.Group>
 
                                     {/*Buttons*/}
                                     <div className="d-grid gap-2 mb-4" style={{ position: 'relative' }}>
                                         {isActive ? (
-                                            <Button variant="primary" type="submit" id="submitBtn" size="lg">
+                                            <Button variant="primary" type="submit" id="submitBtn" >
                                                 Submit
                                             </Button>
                                         ) : (
-                                            <Button variant="primary" type="submit" id="submitBtn" disabled size="lg">
+                                            <Button variant="primary" type="submit" id="submitBtn" disabled>
                                                 Submit
                                             </Button>
                                         )}

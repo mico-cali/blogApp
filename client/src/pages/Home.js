@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Button, Image } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
+import { GiSewingNeedle } from "react-icons/gi";
 
 import FeaturedPosts from '../components/FeaturedPosts'
 
@@ -9,7 +10,7 @@ export default function Home() {
 	const [blogs, setBlogs] = useState([]);
 
 	useEffect(() => {
-		fetch(`http://localhost:4000/blogs/posts`)
+		fetch(`https://blogapp-server-7qfm.onrender.com/blogs/posts`)
 			.then(res => {
 				if (!res.ok) {
 				  throw new Error(`HTTP error! status: ${res.status}`);
@@ -33,10 +34,9 @@ export default function Home() {
 
 	return (
     <div className="container d-flex flex-column align-items-center text-center">
-        {/*<Image src={logoBar1} alt="Lux Belle Perfume" width={400} style={{ marginTop: "30px" }} />*/}
-    	<h1 className="text-center mt-5">Welcome to Threadify</h1>
+    	<h1 className="text-center mt-5">Welcome to  <GiSewingNeedle />Threadify</h1>
         <p style={{ marginTop: "20px", fontStyle: "italic", fontSize: "18px"}} >
-          <i>Weaving thoughts, connecting minds.</i>
+          <i>Weaving thoughts, connecting minds. <GiSewingNeedle /></i>
         </p>
 
         <Button

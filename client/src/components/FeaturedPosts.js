@@ -1,12 +1,19 @@
-import React from 'react';
-import { Card, Image } from 'react-bootstrap';
-
+import React, { useState } from 'react';
+import { Card, Modal, Container, Row, Col } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
+import CommentSection from '../components/CommentSection';
 
 
 export default function Home({ blogs }) {
+	
+	const [activeBlog, setActiveBlog] = useState(null);
+
 	if (!blogs || blogs.length === 0) {
     	return <p>No featured posts yet.</p>;
   	}
+
+  	const handleShowFullPost = (blogId) => setActiveBlog(blogId);
+  	const handleCloseFullPost = () => setActiveBlog(null);
 
 	return (
 		<div className="featured-blogs-container">
@@ -34,13 +41,41 @@ export default function Home({ blogs }) {
 							{blog.content.length > 200 ? `${blog.content.slice(0, 250)}...` : blog.content}
 						</Card.Text>
 						<a 
-							href={`/blog/${blog._id}`} 
 							className="btn btn-outline-primary btn-sm mt-3"
+							onClick={() => handleShowFullPost(blog._id)}
 							style={{ fontSize: '0.85rem', fontWeight: '500' }}
 						>
 							Read More
 						</a>
 					</Card.Body>
+
+					{/* Modal for Full Post */}
+					<Modal show={activeBlog === blog._id} onHide={handleCloseFullPost} size="lg">
+						<Modal.Header closeButton>
+							<Modal.Title>{blog.title}</Modal.Title>
+						</Modal.Header>
+						
+						<Modal.Body>
+							<Container>
+								<Row>
+									<Col md={12}>
+										<Card>
+											<Card.Body>
+												<Card.Text className="text-muted small mb-3">
+													Posted by {blog.author?.username || "Anonymous"} on {new Date(blog.createdAt).toLocaleDateString() || "Date Unavailable"}
+												</Card.Text>
+												
+												<Card.Text style={{ fontSize: '18px' }}>{blog.content}</Card.Text> 
+
+												<CommentSection postId={blog._id} />
+
+											</Card.Body>
+										</Card>
+									</Col>
+								</Row>
+							</Container>
+						</Modal.Body>
+					</Modal>
 				</Card>
 			))}
 		</div>

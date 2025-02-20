@@ -11,7 +11,7 @@ export default function CommentSection({ postId }) {
 
     // Fetch comments for the post
     useEffect(() => {
-        fetch(`http://localhost:4000/comments/blog/${postId}`)
+        fetch(`https://blogapp-server-7qfm.onrender.com/comments/blog/${postId}`)
             .then(res => res.json())
             .then(data => setComments(data.comments))
             .catch(err => console.error("Error fetching comments:", err));
@@ -22,7 +22,7 @@ export default function CommentSection({ postId }) {
         e.preventDefault();
         const token = localStorage.getItem("token");
 
-        fetch(`http://localhost:4000/comments/`, { 
+        fetch(`https://blogapp-server-7qfm.onrender.com/comments/`, { 
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -45,7 +45,7 @@ export default function CommentSection({ postId }) {
     const handleEditComment = (commentId) => {
         const token = localStorage.getItem("token");
 
-        fetch(`http://localhost:4000/comments/${commentId}/update`, {
+        fetch(`https://blogapp-server-7qfm.onrender.com/comments/${commentId}/update`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",
@@ -74,7 +74,7 @@ export default function CommentSection({ postId }) {
         const token = localStorage.getItem("token");
 
         if (window.confirm("Are you sure you want to delete this comment?")) {
-            fetch(`http://localhost:4000/comments/${commentId}/delete`, { 
+            fetch(`https://blogapp-server-7qfm.onrender.com/comments/${commentId}/delete`, { 
                 method: "DELETE",
                 headers: {
                     Authorization: `Bearer ${token}`,

@@ -15,6 +15,7 @@ import Login from './pages/Login';
 import Logout from './pages/Logout';
 import Register from './pages/Register';
 import Blogs from './pages/Blogs';
+import Error from './pages/Error';
 
 // From Context
 import { UserProvider } from './context/UserContext';
@@ -33,8 +34,7 @@ function App() {
   useEffect(() => {
     console.log(localStorage.getItem('token'))
 
-    // fetch(`https://blogapp-sever.onrender.com/users/details`, {
-    fetch(`http://localhost:4000/users/details`, {
+    fetch(`https://blogapp-server-7qfm.onrender.com/users/details`, {
       headers: {
         Authorization: `Bearer ${ localStorage.getItem('token') }`
       }
@@ -81,7 +81,7 @@ function App() {
             <Route path="/logout" element={<Logout />} />
             <Route path="/register" element={<Register />} />
             <Route path="/blogs" element={<Blogs />} />
-            {/*<Route path="*" element={<Error />} />*/}
+            <Route path="*" element={<Error />} />
           </Routes>
         </Container>
       </Router>

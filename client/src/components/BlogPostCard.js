@@ -28,7 +28,7 @@ export default function BlogPostCard({ blog, onDelete}) {
 		e.preventDefault();
 		const token = localStorage.getItem("token");
 
-		fetch(`http://localhost:4000/blogs/posts/${blog._id}/update`, {
+		fetch(`https://blogapp-server-7qfm.onrender.com/blogs/posts/${blog._id}/update`, {
 			method: "PUT",
 			headers: {
 				"Content-Type": "application/json",
@@ -69,7 +69,7 @@ export default function BlogPostCard({ blog, onDelete}) {
 		const token = localStorage.getItem("token");
 
 		if (window.confirm("Are you sure you want to delete this post?")) {
-		  fetch(`http://localhost:4000/blogs/posts/${blog._id}.delete`, {
+		  fetch(`https://blogapp-server-7qfm.onrender.com/blogs/posts/${blog._id}.delete`, {
 		    method: 'DELETE',
 		    headers: {
 		      'Authorization': `Bearer ${token}`,

@@ -14,7 +14,7 @@ export default function AddPost({ onPostAdded }) {
 
         const token = localStorage.getItem("token");
 
-        fetch("http://localhost:4000/blogs/posts", {
+        fetch("https://blogapp-server-7qfm.onrender.com/blogs/posts", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

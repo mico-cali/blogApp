@@ -24,8 +24,8 @@ export default function Login() {
 
         // Prevents page redirection via form submission
         e.preventDefault();
-        // fetch('https://blogapp-sever.onrender.com/users/login', {
-        fetch('http://localhost:4000/users/login', {
+
+        fetch('https://blogapp-server-7qfm.onrender.com/users/login', {
             method: 'POST',
             headers: {
                 "Content-Type": "application/json"
@@ -37,18 +37,13 @@ export default function Login() {
 
             })
         })
-        // .then(res => {
-        //     // checking
-        //     console.log('Response: ', res); 
-        //     res.json()
-        // })
         .then(response => {
             if (!response.ok) {
                 return response.json().then(errorData => { // Get error details
                     console.error("API Error:", response.status, errorData);
-                    const errorMessage = errorData.message || 'Login failed. Check console for details.'; // Handle missing message
+                    const errorMessage = errorData.message || 'Login failed. Check console for details.';
                     notyf.error(`Login failed: ${response.status} - ${errorMessage}`);
-                    throw new Error(errorMessage); // Re-throw to stop the chain
+                    throw new Error(errorMessage);
                 });
             }
             return response.json(); // Proceed if response is ok
@@ -94,7 +89,7 @@ export default function Login() {
         // The token will be sent as part of the request's header information
         // We put "Bearer" in front of the token to follow implementation standards for JWTs
         // fetch('https://blogapp-sever.onrender.com/users/details', {
-        fetch('http://localhost:4000/users/details', {
+        fetch('https://blogapp-server-7qfm.onrender.com/users/details', {
             headers: {
                 Authorization: `Bearer ${ token }`
             }
@@ -138,7 +133,7 @@ export default function Login() {
                         <h2 className="mb-4 text-center">Login</h2>
                             {/*<Form onSubmit={(e) => authenticate(e)}>*/}
                             <Form onSubmit={authenticate}>
-                                <Form.Group className="mb-4" controlId="email">
+                                <Form.Group className="mb-2" controlId="email">
                                     <Form.Label>Email address</Form.Label>
                                     <Form.Control
                                         type="email"
@@ -146,11 +141,11 @@ export default function Login() {
                                         required
                                         value={email}
                                         onChange={(e) => setEmail(e.target.value)}
-                                        className="form-control-lg"
+                                        className="form-control"
                                     />
                                 </Form.Group>
 
-                                <Form.Group className="mb-5" controlId="password">
+                                <Form.Group className="mb-4" controlId="password">
                                     <Form.Label>Password</Form.Label>
                                     <Form.Control
                                         type="password"
@@ -158,18 +153,18 @@ export default function Login() {
                                         required
                                         value={password}
                                         onChange={(e) => setPassword(e.target.value)}
-                                        className="form-control-lg"
+                                        className="form-control"
                                     />
                                 </Form.Group>
 
                                 {/*Buttons*/}
                                 <div className="d-grid gap-2 mb-4"> 
                                 {isActive ? (
-                                    <Button variant="primary" type="submit" id="loginBtn" size="lg">
+                                    <Button variant="primary" type="submit" id="loginBtn">
                                       Login
                                     </Button>
                                 ) : (
-                                    <Button variant="danger" type="submit" id="loginBtn" disabled size="lg">
+                                    <Button variant="danger" type="submit" id="loginBtn" disabled>
                                       Login
                                     </Button>
                                 )}

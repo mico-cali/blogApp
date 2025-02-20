@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Spinner, Card, Container, Row, Col, Button } from 'react-bootstrap';
+import { GiSewingNeedle } from "react-icons/gi";
 
 import UserContext from "../context/UserContext";
 import BlogPostCard from "../components/BlogPostCard";
@@ -17,7 +18,7 @@ export default function Blogs() {
 	    setLoading(true);
 	    setError(null);
 
-		fetch(`http://localhost:4000/blogs/posts`)
+		fetch(`https://blogapp-server-7qfm.onrender.com/blogs/posts`)
 			.then(res => {
 				if (!res.ok) {
 				  throw new Error(`HTTP error! status: ${res.status}`);
@@ -68,7 +69,7 @@ export default function Blogs() {
 		<Container className="my-4 justify-content-center"> {/* Main container */}
 			<Row>
 				<Col md={12}> {/* Blog posts column */}
-					<h1 className="mb-5 mt-3">Threadify Blog Posts</h1>
+					<h1 className="mb-5 mt-3"><GiSewingNeedle />Threadify Blog Posts</h1>
 					{user && user.id ? ( 
 			            <AddPost onPostAdded={handleNewPost} />
 		          	) : null}
